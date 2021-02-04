@@ -6,12 +6,13 @@ const userType = gql`
 type Query{
     users:[User]
     user(id:ID!):User
+    search(name:String!):[User]!
 }
 type User{
     name:String!
     email:String!
     id:ID!
-    posts:[Post]!
+    posts:[Post!]!
     comments:[Comment]!
 }
 type Token{

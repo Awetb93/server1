@@ -27,6 +27,16 @@ const userResolver = {
                 return e
             }
         },
+        search:async (parent, args, { me }, info) => {
+              check(me)
+            try {
+                const user = await User.find({ $text: { $search: args.name } })
+                
+                return  user 
+            } catch (e) {
+                return e
+            }
+        },
     },
     Mutation: {
         signUp: async (parent, args) => {
@@ -81,7 +91,7 @@ const userResolver = {
         },
           unfollow:async (parent, args, { me,post }, info) => {
               check(me)
-              console.log(me.user._id)
+            
               try {
                   me.user.following = me.user.following.filter(follow => follow != args.id)
                   await me.user.save()
@@ -100,6 +110,7 @@ const userResolver = {
               check(me)
             try {
                 const rPosts = await post.loadMany(parent.posts)
+                console.log(rPosts)
                 return rPosts
             } catch (e) {
                 return e

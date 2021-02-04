@@ -11,6 +11,7 @@ id:ID!
 user:User!
 comments:[Comment]
 likes:[Like]
+createdAt:String
 }
 
 extend type Mutation{

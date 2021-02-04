@@ -11,7 +11,8 @@ const schema = new mongoose.Schema({
     followed:[{ type: mongoose.SchemaTypes.ObjectId, ref: "Users" }],
     following:[{ type: mongoose.SchemaTypes.ObjectId, ref: "Users", }],
     likes:[{ type: mongoose.SchemaTypes.ObjectId, ref: "Likes"}]
-})
+}, { timestamps: true })
+schema.index({name:'text'})
 schema.pre('save', async function (next) {
     const user = this
     if (user.isModified("password")) {
@@ -28,7 +29,7 @@ schema.statics.logIn = async (email, password) => {
 }
 schema.methods.setToken = async function () {
     const user = this
-    const token = await Jwt.sign({ _id: user._id.toString() }, process.env.sec)
+    const token = await Jwt.sign({_id: user._id.toString()}, process.env.sec)
     user.tokens = [...user.tokens, { token }]
     await user.save()
     return token

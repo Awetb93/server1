@@ -6,6 +6,7 @@ extend type Query{
 }
 type Like{
 like:Boolean!
+owner:[ID]
 id:ID!
 }
 

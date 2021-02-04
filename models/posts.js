@@ -4,6 +4,6 @@ const schema = new mongoose.Schema({
     user: { type: mongoose.SchemaTypes.ObjectId, ref: "Users" },
     comments:[{type:mongoose.SchemaTypes.ObjectId,ref:"Comments"}],
     likes:[{type:mongoose.SchemaTypes.ObjectId,ref:"Likes"}]
-})
+},{timestamps:true})
 const Post = mongoose.model("Posts", schema)
 module.exports=Post

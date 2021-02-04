@@ -6,6 +6,8 @@ extend type Query{
 }
 type Comment{
 comment:String!
+createdAt:String!
+user:User!
 id:ID!
 }
 

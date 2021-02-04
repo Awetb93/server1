@@ -41,6 +41,18 @@ const resolvers = {
                 return e
             }
         },
+    },
+    Comment: {
+       user:async (parent, args, { me,users }, info) => {
+            check(me)
+        
+            try {
+               const user = await users.load(parent.owner)
+                return user
+            } catch (e) {
+                return e
+            }
+        },
     }
 }
 module.exports=resolvers

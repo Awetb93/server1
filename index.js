@@ -24,10 +24,7 @@ const dispatchPost = async (keys, model) => {
     const posts = await model.find({ _id: { $in: keys } })
     return posts
 }
-// const dispatchComments = async (keys, model) => {
-//     const comments = await model.find({ _id: { $in: keys } })
-//     return comments
-// }
+
 const server = new ApolloServer({
     typeDefs, resolvers, context: async ({ req }) => {
         const me = await auth(req)
