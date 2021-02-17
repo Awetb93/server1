@@ -110,7 +110,7 @@ const userResolver = {
               check(me)
             try {
                 const rPosts = await post.loadMany(parent.posts)
-                console.log(rPosts)
+               
                 return rPosts
             } catch (e) {
                 return e

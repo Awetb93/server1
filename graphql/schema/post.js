@@ -1,5 +1,6 @@
 const { gql } = require("apollo-server-express")
 const postType = gql`
+scalar Upload
 extend type Query{
     posts:[Post]!
     post(id:ID!):Post
@@ -15,7 +16,7 @@ createdAt:String
 }
 
 extend type Mutation{
-    addPost(post:String!):Post
+    addPost(post:String,file:Upload):Post
     editPost(post:String!,id:ID!):Post
     deletePost(post:String!,id:ID!):Post
 }

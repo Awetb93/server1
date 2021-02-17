@@ -12,13 +12,18 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.19.1",
+    "aws-sdk": "^2.845.0",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dataloader": "^2.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fs-capacitor": "^6.2.0",
     "graphql": "^15.4.0",
+    "graphql-upload": "^11.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.11"
+    "mongoose": "^5.11.11",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.2"
   }
 }
