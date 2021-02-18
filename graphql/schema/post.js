@@ -6,8 +6,9 @@ extend type Query{
     post(id:ID!):Post
 }
 type Post{
-post:String!
-file:String!
+post:String
+picUrl:String
+picName:String
 id:ID!
 user:User!
 comments:[Comment]

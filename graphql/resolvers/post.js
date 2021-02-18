@@ -45,14 +45,14 @@ const resolvers = {
             try {
                 console.log(args.post)
                if (args.file) {
-               const { filename,createReadStream } = await args.file
+                   const { filename, createReadStream } = await args.file
+                   console.log(filename)
                    S3.upload({ ...s3DefaultParams, Body: createReadStream(), Key: `${id} ${filename}` }, async(err, data) => {
                        if (err) {
                     console.log(err)
                        }
-                       else {
-                           console.log(data)
-                           const name=data.Key.split(" ")
+                       else {    
+                 const name=data.Key.split(" ")
                 const post = new Post({post:args.post,user:me.user._id,picUrl:data.Location,picName:name[1]})
                 me.user.posts.push(post._id)
                 await post.save()
