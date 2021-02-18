@@ -77,14 +77,17 @@ const userResolver = {
               check(me)
               try {
                   me.user.following = me.user.following.filter(follow => follow != args.id)
+               
                   me.user.following.push(args.id)
                   await me.user.save()
                   const user = await User.findOne({ _id: args.id })
-                  user.followed = user.followed.filter(follow => follow != args.id)
+                  
+                  user.followed = user.followed.filter(follow => follow != me.user._id.toString())
+                
                   user.followed.push(me.user._id)
                   await user.save()
                 
-                return {id:args.id}
+                return me.user
             } catch (e) {
                 return e
             }
@@ -93,10 +96,11 @@ const userResolver = {
               check(me)
             
               try {
+           
                   me.user.following = me.user.following.filter(follow => follow != args.id)
                   await me.user.save()
                   const user = await User.findOne({ _id: args.id })
-                  user.followed = user.followed.filter(follow => follow != args.id)
+                  user.followed = user.followed.filter(follow => follow != me.user._id.toString())
                   await user.save()
                 return {id:args.id}
             } catch (e) {

@@ -11,6 +11,8 @@ type Query{
 type User{
     name:String!
     email:String!
+    following:[ID]
+    followed:[ID]
     id:ID!
     posts:[Post!]!
     comments:[Comment]!

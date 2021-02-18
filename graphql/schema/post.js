@@ -15,7 +15,6 @@ comments:[Comment]
 likes:[Like]
 createdAt:String
 }
-
 extend type Mutation{
     addPost(post:String,file:Upload):Post
     editPost(post:String!,id:ID!):Post
