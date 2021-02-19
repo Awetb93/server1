@@ -30,12 +30,10 @@ const resolvers = {
             check(me)
             const comment = new Comments({...args,owner:me.user._id,post:args.postid})
             try {
-                me.user.comments.push(comment._id)
                 const post = await Post.findById(args.postid)
                 post.comments.push(comment._id)
                 await comment.save()
                 await post.save()
-                await me.user.save()
                 return comment
             } catch (e) {
                 return e

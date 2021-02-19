@@ -7,10 +7,9 @@ const schema = new mongoose.Schema({
     password:{type:String,required:true,trim:true},
     tokens: [{ token: { type: String, required: true, trim: true } }],
     posts: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Posts" }],
-    comments: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Comments" }],
     followed:[{ type: mongoose.SchemaTypes.ObjectId,}],
     following:[{ type: mongoose.SchemaTypes.ObjectId,}],
-    likes:[{ type: mongoose.SchemaTypes.ObjectId, ref: "Likes"}]
+    
 }, { timestamps: true })
 schema.index({name:'text'})
 schema.pre('save', async function (next) {

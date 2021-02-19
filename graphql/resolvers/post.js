@@ -4,6 +4,8 @@ const Post = require("../../models/posts")
 const { AuthenticationError } = require("apollo-server-express")
 const {GraphQLUpload}=require("graphql-upload")
 const Mongoose = require("mongoose")
+const Comments = require("../../models/comments")
+const Likes = require("../../models/likes")
 Aws.config.update({region:"us-east-1"})
 const S3=new Aws.S3({region:"us-east-1"})
 const s3DefaultParams = {
@@ -43,7 +45,6 @@ const resolvers = {
         addPost:async (parent, args, { me }, info) => {
             check(me)
             try {
-                console.log(args.post)
                if (args.file) {
                    const { filename, createReadStream } = await args.file
                    console.log(filename)
@@ -76,6 +77,26 @@ const resolvers = {
                 return e
             }
         },
+         deletePost:async (parent, args, { me }, info) => {
+            check(me)
+            try {
+                const post = await Post.findByIdAndDelete(args.id)
+                me.user.posts = me.user.posts.filter(post => post != args.id)
+                const comments = await Comments.deleteMany({post:args.id})
+                const likes = await Likes.deleteMany({ post: args.id })
+                await me.user.save()
+                return post
+            
+                }  
+                
+               
+            
+            catch (e) {
+                return e
+            }
+        },
+        
+
     },
     Post: {
         user:async (parent, args, { me,users }, info) => {
