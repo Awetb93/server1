@@ -25,7 +25,7 @@ type Token{
 type Mutation{
     signUp( name:String!,email:String!,password:String!):Token
     signIn( email:String!,password:String!):Token
-    signOut:User
+    signOut(id:ID!):User
     following(id:ID!):User
     unfollow(id:ID!):User
     block(id:ID!):User

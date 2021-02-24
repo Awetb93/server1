@@ -16,7 +16,6 @@ const {graphqlUploadExpress}=require("graphql-upload")
 const dispatchUser = async (keys, model) => {
     const users = await model.find({ _id: { $in: keys } })
     const user = keys.map(key => users.find(user=>user.id == key)) 
-
     return user
     
 }

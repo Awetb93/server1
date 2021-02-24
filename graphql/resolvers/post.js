@@ -47,10 +47,9 @@ const resolvers = {
             try {
                if (args.file) {
                    const { filename, createReadStream } = await args.file
-                   console.log(filename)
                    S3.upload({ ...s3DefaultParams, Body: createReadStream(), Key: `${id} ${filename}` }, async(err, data) => {
                        if (err) {
-                    console.log(err)
+                    throw err
                        }
                        else {    
                  const name=data.Key.split(" ")
